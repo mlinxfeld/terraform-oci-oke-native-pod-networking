@@ -7,15 +7,11 @@ value = <<EOT
 
 $ oci ce cluster create-kubeconfig --region ${var.region} --cluster-id ${oci_containerengine_cluster.FoggyKitchenOKECluster.id}
 
-3.  Create NGINX deployment:
-
-$ kubectl create -f nginx.yaml
-
-4.  Get POD name:
+3.  Get PODs names:
 
 $ kubectl get pods 
 
-5.  Verfiy PODs IPs:
+4.  Verfiy PODs IPs:
 
 $ kubectl describe  pods | grep '  IP:'
 

@@ -1,9 +1,6 @@
-# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
-# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
-
-title: "Terraform OCI Container Engine for Kubernetes (aka OCI OKE) with Autoscaler"
-description: "FoggyKitchen.com - Terraform OCI Container Engine for Kubernetes (aka OCI OKE) with Autoscaler."
-stackDescription: "FoggyKitchen.com - Terraform OKE Container Engine for Kubernetes (aka OCI OKE) with Autoscaler."
+title: "Terraform OCI Container Engine for Kubernetes (aka OCI OKE) with Native POD networking"
+description: "FoggyKitchen.com - Terraform OCI Container Engine for Kubernetes (aka OCI OKE) with Native POD networking."
+stackDescription: "FoggyKitchen.com - Terraform OCI Container Engine for Kubernetes (aka OCI OKE) with Native POD networking."
 schemaVersion: 1.1.0
 version: "20201028"
 locale: "en"
@@ -17,7 +14,6 @@ variableGroups:
   - instance_os
   - linux_os_version
   - oci_service_gateway
-  - cluster_kube_config_token_version
   - network_cidrs
 
 - title: "Required Configuration"
@@ -39,14 +35,9 @@ variableGroups:
   - flex_shape_memory
   - flex_shape_ocpus
   - cluster_name
-
-- title: "OKE Autoscaler Optional Configuration"
-  visible: 
-      and:
-        - show_advanced
-  variables:
-  - min_number_of_nodes
-  - max_number_of_nodes
+  - max_pods_per_node
+  - deploy_ngnix
+  - number_of_replicas
 
 variables:
 
@@ -84,7 +75,7 @@ variables:
     required: true
     visibile: true
     title: "Availability Domain"
-    description: "Choose Availability Domain where your Webserver1 & Webserver2 will be deployed."
+    description: "Choose Availability Domain where K8S Nodes will be deployed."
     dependsOn:
       regionName: ${region}
       compartmentId: ${compartment_ocid}
@@ -113,25 +104,15 @@ variables:
       - "v1.20.11"
       - "v1.20.8"
 
-  min_number_of_nodes:
-    type: number
-    required: false
-    minimum: 1
-    maximum: 128
-    multipleOf: 1
-    default: 3
-    title: "What is minimum number of K8S Nodes?"
-    description: "Choose number of K8S Nodes to be deployed at minimum by Autoscaler."
-
-  max_number_of_nodes:
+  max_pods_per_node:
     type: number
     required: false
     minimum: 1
     maximum: 128
     multipleOf: 1
     default: 10
-    title: "What is maximum number of K8S Nodes?"
-    description: "Choose number of K8S Nodes to be deployed at maximum by Autoscaler."
+    title: "What is maximum number of PODs per K8S Node?"
+    description: "Choose number of K8S PODs to be deployed at maximum in one K8S Node."
 
   shape:
     type: oci:core:instanceshape:name
@@ -223,6 +204,26 @@ variables:
     default: "7.9"
     enum:
       - "7.9"  
+
+  deploy_ngnix:
+    type: boolean
+    title: "Deploy NGNIX?"
+    description: "Check if you want to deploy NGNIX automatically."
+    visible: true
+    default: false
+
+  number_of_ngnix_replicas:
+    type: number
+    required: false
+    minimum: 1
+    maximum: 128
+    multipleOf: 1
+    default: 10
+    title: "How many NGNIX replicas?"
+    description: "Choose number of NGNIX replicas to be deployed."
+    visible: 
+      and:
+        - deploy_ngnix
 
 outputs:
 

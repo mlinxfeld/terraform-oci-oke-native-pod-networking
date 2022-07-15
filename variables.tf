@@ -45,11 +45,15 @@ variable "cluster_name" {
   default = "FoggyKitchenOKECluster"
 }
 
-variable "min_number_of_nodes" {
-  default = 3
+variable "max_pods_per_node" {
+  default = 10
 }
 
-variable "max_number_of_nodes" {
+variable "deploy_ngnix" {
+  default = true
+}
+
+variable "number_of_ngnix_replicas" {
   default = 10
 }
 

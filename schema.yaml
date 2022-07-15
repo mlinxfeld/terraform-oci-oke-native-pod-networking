@@ -37,7 +37,7 @@ variableGroups:
   - cluster_name
   - max_pods_per_node
   - deploy_ngnix
-  - number_of_replicas
+  - number_of_ngnix_replicas
 
 variables:
 

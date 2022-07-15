@@ -201,15 +201,11 @@ cluster_instruction = <<EOT
 
 $ oci ce cluster create-kubeconfig --region eu-amsterdam-1 --cluster-id ocid1.cluster.oc1.eu-amsterdam-1.aaaaaaaa74sp2j53tgbnlxmb7fhn62lj4dspxwdukvz3eghvkch4yi2o7tka
 
-3.  Create NGINX deployment:
-
-$ kubectl create -f nginx.yaml
-
-4.  Get POD name:
+3.  Get POD name:
 
 $ kubectl get pods
 
-5.  Verfiy PODs IPs:
+4.  Verfiy PODs IPs:
 
 $ kubectl describe  pods | grep '  IP:'
 

@@ -61,7 +61,7 @@ resource "oci_containerengine_node_pool" "FoggyKitchenOKENodePool" {
     node_pool_pod_network_option_details {
         cni_type = "OCI_VCN_IP_NATIVE"
     
-        max_pods_per_node = "10"
+        max_pods_per_node = var.max_pods_per_node
         pod_nsg_ids       = []
         pod_subnet_ids    = [oci_core_subnet.FoggyKitchenOKENodesPodsSubnet.id]
     }

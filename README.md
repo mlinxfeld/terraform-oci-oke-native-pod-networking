@@ -8,13 +8,13 @@ In this repository, I have documented my hands on experience with Terrafrom for 
 
 With the usage of this example HCL code you can build topology documented by diagram below. This topology is extremly simplified for education purposes and rather cannot be used for production implementations. 
 
-![](terraform-oci-arch-oke-native-pod-networking.png)
+![](terraform-oci-oke-native-pod-networking.png)
 
 ## How to use code 
 
 ### Deploy Using Oracle Resource Manager
 
-1. Click [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?region=home&zipUrl=https://github.com/mlinxfeld/terraform-oci-arch-oke-native-pod-networking/releases/latest/download/terraform-oci-arch-oke-native-pod-networking-stack-latest.zip)
+1. Click [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?region=home&zipUrl=https://github.com/mlinxfeld/terraform-oci-oke-native-pod-networking/releases/latest/download/terraform-oci-oke-native-pod-networking-stack-latest.zip)
 
     If you aren't already signed in, when prompted, enter the tenancy and user credentials.
 
@@ -39,8 +39,8 @@ With the usage of this example HCL code you can build topology documented by dia
 Clone the repo from GitHub.com by executing the command as follows and then go to terraform-oci-private-oke directory:
 
 ```
-[opc@terraform-server ~]$ git clone https://github.com/mlinxfeld/terraform-oci-arch-oke-native-pod-networking
-Cloning into 'terraform-oci-arch-oke-native-pod-networking'...
+[opc@terraform-server ~]$ git clone https://github.com/mlinxfeld/terraform-oci-oke-native-pod-networking
+Cloning into 'terraform-oci-oke-native-pod-networking'...
 remote: Enumerating objects: 29, done.
 remote: Counting objects: 100% (29/29), done.
 remote: Compressing objects: 100% (20/20), done.
@@ -48,9 +48,9 @@ remote: Total 29 (delta 9), reused 28 (delta 8), pack-reused 0
 Receiving objects: 100% (29/29), 308.42 KiB | 2.27 MiB/s, done.
 Resolving deltas: 100% (9/9), done.
 
-[opc@terraform-server ~]$ cd terraform-oci-arch-oke-native-pod-networking/
+[opc@terraform-server ~]$ cd terraform-oci-oke-native-pod-networking/
 
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ ls -latr
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ ls -latr
 
 -rw-r--r--   1 opc opc     292 Jul 14 19:28 compartment.tf
 -rw-r--r--   1 opc opc      80 Jul 14 19:28 tls.tf
@@ -58,7 +58,7 @@ Resolving deltas: 100% (9/9), done.
 -rw-r--r--   1 opc opc    2292 Jul 14 21:56 oke.tf
 -rw-r--r--   1 opc opc   13534 Jul 14 21:58 network.tf
 -rw-r--r--   1 opc opc     614 Jul 14 22:28 .gitignore
--rw-r--r--@  1 opc opc  318426 Jul 14 22:37 terraform-oci-arch-oke-native-pod-networking.png
+-rw-r--r--@  1 opc opc  318426 Jul 14 22:37 terraform-oci-oke-native-pod-networking.png
 drwxr-xr-x   3 opc opc      96 Jul 15 09:59 templates
 -rw-r--r--   1 opc opc    1377 Jul 15 10:04 datasources.tf
 -rw-r--r--   1 opc opc     368 Jul 15 10:09 outputs.tf
@@ -77,9 +77,9 @@ drwxr-xr-x  19 opc opc     608 Jul 15 11:14 .
 Within web browser go to URL: https://www.terraform.io/downloads.html. Find your platform and download the latest version of your terraform runtime. Add directory of terraform binary into PATH and check terraform version:
 
 ```
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ export PATH=$PATH:/home/opc/terraform
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ export PATH=$PATH:/home/opc/terraform
 
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ terraform --version
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ terraform --version
 
 Terraform v1.0.0
 
@@ -91,7 +91,7 @@ is 1.2.2. You can update by downloading from https://www.terraform.io/downloads.
 Next create environment file with TF_VARs:
 
 ```
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ vi setup_oci_tf_vars.sh
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ vi setup_oci_tf_vars.sh
 export TF_VAR_user_ocid="ocid1.user.oc1..aaaaaaaaob4qbf2(...)uunizjie4his4vgh3jx5jxa"
 export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1..aaaaaaaas(...)krj2s3gdbz7d2heqzzxn7pe64ksbia"
 export TF_VAR_compartment_ocid="ocid1.tenancy.oc1..aaaaaaaasbktyckn(...)ldkrj2s3gdbz7d2heqzzxn7pe64ksbia"
@@ -101,14 +101,14 @@ export TF_VAR_region="eu-frankfurt-1"
 export TF_VAR_private_key_oci="/tmp/id_rsa"
 export TF_VAR_public_key_oci="/tmp/id_rsa.pub"
 
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ source setup_oci_tf_vars.sh
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ source setup_oci_tf_vars.sh
 ```
 
 #### STEP 4.
 Run *terraform init* with upgrade option just to download the lastest neccesary providers:
 
 ```
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ terraform init 
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ terraform init 
 
 Initializing the backend...
 
@@ -156,7 +156,7 @@ commands will detect it and remind you to do so if necessary.
 Run *terraform apply* to provision the content of this repo (type **yes** to confirm the the apply phase):
 
 ```
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ terraform apply
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ terraform apply
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
@@ -250,7 +250,7 @@ EOT
 After testing the environment you can remove the OCI OKE infra. You should just run *terraform destroy* (type **yes** for confirmation of the destroy phase):
 
 ```
-[opc@terraform-server terraform-oci-arch-oke-native-pod-networking]$ terraform destroy -auto-approve
+[opc@terraform-server terraform-oci-oke-native-pod-networking]$ terraform destroy -auto-approve
 
 data.oci_containerengine_node_pool_option.FoggyKitchenOKEClusterNodePoolOption: Refreshing state...
 (…)

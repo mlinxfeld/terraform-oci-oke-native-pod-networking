@@ -29,7 +29,7 @@ variableGroups:
   variables:
   - kubernetes_version
   - ssh_public_key
-  - shape
+  - oke_node_shape
   - flex_shape_memory
   - flex_shape_ocpus
   - oke_node_os_version

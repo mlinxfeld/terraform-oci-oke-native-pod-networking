@@ -30,7 +30,4 @@ locals {
   oracle_linux_images        = [
     for source in local.all_sources : source.image_id if length(regexall("Oracle-Linux-${var.oke_node_os_version}-${local.arm_node_shape}.+-OKE-${local.kubernetes_version}-[0-9]+", source.source_name)) > 0
   ]
-  oracle_linux_service_names = [
-    for source in local.all_sources : source.source_name if length(regexall("Oracle-Linux-${var.oke_node_os_version}-${local.arm_node_shape}.+OKE-${local.kubernetes_version}-*", source.source_name)) > 0
-  ]
 }

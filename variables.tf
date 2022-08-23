@@ -31,10 +31,6 @@ variable "oke_node_os_version" {
   #default = "7.9"
 }
 
-variable "shape" {
-  default = "VM.Standard.E4.Flex"
-}
-
 variable "flex_shape_memory" {
   default = 16
 }

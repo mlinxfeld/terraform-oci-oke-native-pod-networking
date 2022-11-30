@@ -8,7 +8,8 @@ locals {
   ]
 
   compute_arm_shapes = [
-    "VM.Standard.A1.Flex"
+    "VM.Standard.A1.Flex",
+    "BM.Standard.A1"  
   ]
 
   is_flexible_node_shape                  = contains(local.compute_flexible_shapes, var.oke_node_shape)

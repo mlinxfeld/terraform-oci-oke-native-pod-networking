@@ -20,3 +20,5 @@ spec:
         resources:
           requests:
             memory: "500Mi"
+      ${ is_arm_node_shape ? "nodeSelector:" : "" }
+        ${ is_arm_node_shape ? "kubernetes.io/arch: arm64" : "" }
